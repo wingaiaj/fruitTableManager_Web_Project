@@ -1,0 +1,36 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="css/index.css">
+</head>
+<body>
+<div id="div1_fruit">
+    <div id="div2_fruit">
+        <div id="img1">
+            <img id="international" src="image/international.jpg">
+        </div>
+        <div id="img2">
+            <img id="img_huazi" src="image/huazi.jpg">
+        </div>
+        <h1 class="tx">水果库存后台管理系统</h1>
+        <table id="fruit_tbl">
+            <tr>
+                <th>单价</th>
+                <th>价格</th>
+                <th>数量</th>
+                <th>操作</th>
+            </tr>
+            <tr th:if="${#lists.isEmpty(session.allFruit)}">
+                <td colspan="4">无数据,库存为空</td>
+            </tr>
+            <tr th:unless="${#lists.isEmpty(session.allFruit)}" th:each="fruit:${session.allFruit}">
+                <td><a th:text="${fruit.fName}" th:href="@{/edit.do}">苹果</a></td>
+                <td th:text="${fruit.price}">5</td>
+                <td th:text="${fruit.count}">20</td>
+                <td><img src="image/del.jpg" id="del_img"/></td>
+            </tr>
+        </table>
+    </div>
+</div>
+</body>
+</html>
