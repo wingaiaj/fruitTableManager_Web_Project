@@ -1,0 +1,65 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="css/index.css">
+    <script language="JavaScript" src="js/index.js"></script>
+</head>
+<body>
+<div id="div1_fruit">
+    <div id="div2_fruit">
+        <div id="img1">
+            <img id="international" src="image/international.jpg">
+            <div id="img4">
+                <img id="img_yes" src="image/yes.jpg">
+            </div>
+        </div>
+        <div id="img2">
+            <img id="img_huazi" src="image/huazi.jpg">
+            <div id="img3">
+                <img id="img_head" src="image/bighead.jpg">
+            </div>
+            <div id="img5">
+                <img id="img_cute" src="image/cute.jpg">
+            </div>
+        </div>
+        <table id="fruit_tbl">
+            <div id="img6">
+                <img id="img_ye" src="image/ye.jpg">
+            </div>
+            <h1 class="tx">水果库存后台管理系统</h1>
+            <tr>
+                <div id="add">
+                    <a id="a_id" th:href="@{/AddSkip.do}">添加水果记录</a>
+                </div>
+                <th>名称</th>
+                <th>价格</th>
+                <th>数量</th>
+                <th>说明</th>
+                <th>操作</th>
+            </tr>
+            <tr th:if="${#lists.isEmpty(session.allFruit)}">
+                <td colspan="5">无数据,库存为空</td>
+            </tr>
+            <tr th:unless="${#lists.isEmpty(session.allFruit)}" th:each="fruit:${session.allFruit}">
+                <!--                <td><a th:text="${fruit.fName}" th:href="@{'/edit.do?fid='+${fruit.fid}}">苹果</a></td>-->
+                <td><a th:text="${fruit.fName}" th:href="@{/edit.do(fid=${fruit.fid})}">null</a></td>
+                <td th:text="${fruit.price}">null</td>
+                <td th:text="${fruit.count}">null</td>
+                <td th:text="${fruit.remark}">null</td>
+                <td><img src="image/del.jpg" id="del_img" th:onclick="|delfruit(${fruit.fid})|"/></td>
+            </tr>
+        </table>
+        <div id="div_button" class="center">
+            <input id="buttonLast" type="button" name="Last" value="上页" th:onclick="|page(${session.pageNO - 1})|"
+                   th:disabled="${session.pageNO==1}"/>
+            <input id="buttonNext" type="button" name="next" value="下页" th:onclick="|page(${session.pageNO + 1})|"
+                   th:disabled="${session.pageNO==session.count}"/>
+            <input id="buttonFirst" type="button" name="next" value="首页" th:onclick="|page(${1})|"
+                   th:disabled="${session.pageNO==1}"/>
+            <input id="buttonEnd" type="button" name="next" value="尾页" th:onclick="|page(${session.count})|"
+                   th:disabled="${session.pageNO==session.count}"/>
+        </div>
+    </div>
+</div>
+</body>
+</html>
