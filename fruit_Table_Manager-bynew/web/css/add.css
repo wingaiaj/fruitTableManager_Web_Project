@@ -1,0 +1,38 @@
+body {
+    position: relative;
+    margin: 0;
+    padding: 0;
+}
+
+#first_div {
+    background-color: honeydew;
+    height: 1000px;
+}
+
+#div {
+    background-color: white;
+    width: 80%;
+    margin-left: 10%;
+    height: 100%;
+}
+
+#fruit_tbl {
+    width: 50%;
+    font-size: 20px;
+    color: cornflowerblue;
+    margin-left: 40%;
+    float: left;
+    margin-top: 5px;
+}
+#fruit_tbl td{
+  padding-top: 10px;
+}
+#subid{
+    float: left;
+    margin-left: 110px;
+}
+#pid{
+    font-size: 25px;
+    margin-left: 45%;
+}
+

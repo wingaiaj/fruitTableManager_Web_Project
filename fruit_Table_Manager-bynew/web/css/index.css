@@ -1,0 +1,70 @@
+body {
+    position: relative;
+    margin: 0;
+    padding: 0;
+}
+
+#first_div {
+    background-color: honeydew;
+    height: 1000px;
+}
+
+#div {
+    background-color: white;
+    width: 80%;
+    margin-left: 10%;
+    height: 100%;
+}
+
+#fruit_tbl {
+    width: 50%;
+    text-align: center;
+    font-size: 20px;
+    color: cornflowerblue;
+    margin-left: 23%;
+    float: left;
+    margin-top: 5px;
+}
+
+#fruit_tbl, #fruit_tbl tr, #fruit_tbl td, #fruit_tbl th {
+    border: 1px solid cornflowerblue;
+    border-collapse: collapse;
+
+}
+
+#p {
+    font-size: 30px;
+    color: wheat;
+    float: left;
+    border: 1px solid cornflowerblue;
+    background-color: darkslategrey;
+    margin-left: 525px;
+}
+
+#img {
+    width: 20px;
+}
+
+#div_button {
+    height: 25px;
+    float: left;
+    margin-top: 50px;
+    margin-left: 480px;
+}
+
+.button {
+    width: 80px;
+    color: black;
+}
+
+#a_ {
+    border: 1px solid black;
+    margin-top: 500px;
+    margin-left: 300px;
+}
+
+#form_div {
+    float: left;
+    margin-top: 80px;
+    margin-left: -330px;
+}

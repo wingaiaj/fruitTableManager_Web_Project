@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="css/add.css">
+</head>
+<body>
+<div id="first_div">
+    <div id="div">
+        <p id="pid">添加水果</p>
+        <form th:action="@{/add.do}" method="post">
+            <table id="fruit_tbl">
+                <tr>
+                    <td>水果名称: <input type="text" name="fname"/></td>
+                </tr>
+                <tr>
+                    <td>水果单价: <input type="text" name="price"/></td>
+                </tr>
+                <tr>
+                    <td> 水果总数: <input type="text" name="fCount"/></td>
+                </tr>
+                <tr>
+                    <td>水果备注: <input type="text" name="remark"/></td>
+                </tr>
+                <td id="subid"><input type="submit" value="确定"></td>
+            </table>
+        </form>
+    </div>
+</div>
+</body>
+</html>
