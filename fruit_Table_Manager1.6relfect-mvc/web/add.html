@@ -1,0 +1,61 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="css/add.css">
+</head>
+<body>
+<div id="div1_fruit">
+    <div id="div2_fruit">
+        <div id="img1">
+            <img id="international" src="image/international.jpg">
+            <div id="img4">
+                <img id="img_yes" src="image/yes.jpg">
+            </div>
+        </div>
+        <div id="img2">
+            <img id="img_huazi" src="image/huazi.jpg">
+            <div id="img3">
+                <img id="img_head" src="image/bighead.jpg">
+            </div>
+            <div id="img5">
+                <img id="img_cute" src="image/cute.jpg">
+            </div>
+        </div>
+        <div id="img6">
+            <img id="img_ye" src="image/ye.jpg">
+        </div>
+        <h1 class="tx">添加水果记录</h1>
+        <form action="fruit.do" method="post">
+            <input type="hidden" name="operate" value="add"/>
+            <!--隐藏域 功能类似于文本框，它的值会随着表单的 发送也会发送给服务器，但是在界面上对用户隐藏-->
+            <table id="fruit_tbl">
+                <tr>
+                    <th>水果名称</th>
+                    <!--                <td><input type="text" name="fname" th:value="${fruit.fName}"></td> &lt;!&ndash;获取请求作用域的值&ndash;&gt;-->
+                    <td><input type="text" name="fname"/></td>
+                    <!--获取请求作用域的值 th:object"${fruit}"   改为*{fName}-->
+                </tr>
+                <tr>
+                    <th>水果价格</th>
+                    <!--                <td><input type="text" name="price" th:value="${fruit.price}"></td>-->
+                    <td><input type="text" name="price"/></td>
+                </tr>
+                <tr>
+                    <th>水果数量</th>
+                    <!--                <td><input type="text" name="fcount" th:value="${fruit.count}"></td>-->
+                    <td><input type="text" name="fcount"/></td>
+                </tr>
+                <tr>
+                    <th>水果备注</th>
+                    <!--                <td><input type="text" name="remark" th:value="${fruit.remark}"></td>-->
+                    <td><input type="text" name="remark"/></td>
+                </tr>
+                <tr>
+                    <th colspan="2"><input type="submit" value="确定"/></th>
+                </tr>
+            </table>
+        </form>
+    </div>
+</div>
+</body>
+</html>
