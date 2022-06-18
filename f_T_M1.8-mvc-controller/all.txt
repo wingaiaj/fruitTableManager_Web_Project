@@ -1,0 +1,13 @@
+客户端发送请求->DispatcherServlet拦截请求
+getServletPath获取请求路径 /fruit.do
+截取字符串 fruit
+
+init()方法中加载配置文件 applicationContext.xml
+<bean id="fruit" class="com.zx.controller.fruitController" />
+
+this.getClass.getClassLoader.getResourceAsStream(applicationContext.xml)
+//创建DocumentBuilder类
+DocumentBuilder documentBuilder = DocumentBuilderFactory.newDocumentBuilder;
+//加载配置文件
+//创建Document
+Document document = documentBuilder.parse(resourceAsStream);
