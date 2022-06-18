@@ -1,0 +1,123 @@
+body {
+    position: relative;
+    margin: 0;
+    padding: 0;
+}
+
+#div1_fruit {
+    height: 1000px;
+    background-color: darkseagreen;
+}
+
+#div2_fruit {
+    margin-left: 10%;
+    width: 80%;
+    height: 100%;
+    background-color: honeydew;
+    float: left;
+    border: 1px solid black;
+}
+
+#fruit_tbl {
+    text-align: center;
+    width: 50%;
+    margin-left: 5%;
+    margin-bottom: 500px;
+    border-collapse: collapse;
+    float: left;
+    border: hotpink 1px solid;
+}
+
+#fruit_tbl tr, #fruit_tbl td {
+    font-size: 19px;
+    color: cornflowerblue;
+    border: hotpink 1px solid;
+
+}
+
+.tx {
+    width: 150px;
+    font-size: 25px;
+    font-family: "黑体";
+    font-weight: lighter;
+    color: deepskyblue;
+    margin-left: 47%;
+    border: 5px solid slateblue;
+}
+
+#del_img {
+    width: 20px;
+    height: 20px;
+}
+
+
+#international {
+    width: 300px;
+    height: 250px;
+}
+
+#img1 {
+    width: 300px;
+    height: 100px;
+    float: right;
+    border: 2px solid pink;
+}
+
+#img_huazi {
+    float: right;
+    width: 260px;
+    height: 220px;
+}
+
+#img2 {
+    margin-left: 160px;
+    width: 100px;
+    height: 100px;
+    float: left;
+    border: 2px solid pink;
+}
+#img3{
+    width: 260px;
+    height: 220px;
+    float: left;
+    border:1px solid black;
+    margin-left: -160px;
+}
+#img_head{
+    width: 260px;
+    height: 220px;
+}
+#img4{
+    width: 300px;
+    height: 300px;
+    border:1px solid black;
+    float: right;
+}
+
+#img_yes{
+    width: 300px;
+    height: 300px;
+}
+#img5{
+    width: 300px;
+    height: 300px;
+    float: left;
+    margin-left:-150px;
+}
+#img_cute{
+    width: 280px;
+    height: 300px;
+}
+#img6{
+    width: 60px;
+    height: 60px;
+    float: left;
+    margin-left: 300px;
+    margin-top:0px;
+
+}
+#img_ye{
+    width: 72px;
+    height: 72px;
+}
+
