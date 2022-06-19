@@ -114,12 +114,13 @@ public class DispatcherServlet extends ViewBaseServlet {
                             parametersValue[i] = request.getSession();
                         } else {
                             String parameterTrue = request.getParameter(name);
-
-                            if ("java.lang.Integer".equals(TypeName)) {
-                                parametersValue[i] = Integer.parseInt(parameterTrue);
-                            } else {
-                                parametersValue[i] = parameters;
+                            Object parObj = parameterTrue;
+                            if (parObj != null) {
+                                if ("java.lang.Integer".equals(TypeName)) {
+                                    parObj = Integer.parseInt(parameterTrue);
+                                }
                             }
+                            parametersValue[i] = parObj;
                         }
                     }
                     m.setAccessible(true);

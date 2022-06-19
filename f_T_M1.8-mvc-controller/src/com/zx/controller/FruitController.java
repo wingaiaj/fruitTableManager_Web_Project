@@ -28,6 +28,7 @@ public class FruitController {
         //创建session对象
         HttpSession session = request.getSession();
         if (StringUtils.isNotEmpty(op) && "opTrue".equals(op)) {
+//            pageNo = 1;
             //为空
             if (StringUtils.isEmpty(keyword)) {
                 //赋值为”“
