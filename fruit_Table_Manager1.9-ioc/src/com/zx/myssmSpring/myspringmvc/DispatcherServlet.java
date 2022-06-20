@@ -1,8 +1,8 @@
 package com.zx.myssmSpring.myspringmvc;
 
+import com.zx.myssmSpring.util.StringUtils;
 import com.zx.myssmSpring.io.BeanFactory;
 import com.zx.myssmSpring.io.XmlClassPathApplicationContext;
-import com.zx.myssmSpring.util.StringUtils;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -102,7 +102,6 @@ public class DispatcherServlet extends ViewBaseServlet {
                     e.printStackTrace();
                 }
             }
-
         }
     }
 }

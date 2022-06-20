@@ -11,6 +11,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -64,18 +65,34 @@ public class XmlClassPathApplicationContext implements BeanFactory {
                 if (beanItem.getNodeType() == Node.ELEMENT_NODE) {
                     //强转为
                     Element beanElement = (Element) beanItem;
+                    //获取beanid
+                    String id = beanElement.getAttribute("id");
                     //获取所有子节点
                     NodeList childNodeList = beanElement.getChildNodes();
 //                    System.out.println(childNodes.getLength());//到有依赖的第一个bean有5个子节点 前一个 后两个是空白 中间注释加property 第二个3个子节点
                     //遍历子节点
-                    for (int j = 0; j < childNodeList.getLength() ; j++) {
+                    for (int j = 0; j < childNodeList.getLength(); j++) {
                         Node beanChildNode = childNodeList.item(j);
                         //如果子节点是元素节点    并且此元素节点必须是"property"
-                        if(beanChildNode.getNodeType()==Node.ELEMENT_NODE&& "property".equals(beanChildNode.getNodeName())){
+                        if (beanChildNode.getNodeType() == Node.ELEMENT_NODE && "property".equals(beanChildNode.getNodeName())) {
                             //强转为元素节点
                             Element propertyElement = (Element) beanChildNode;
+                            //获取property元素的属性
                             String propertyName = propertyElement.getAttribute("name");
                             String refPropertyName = propertyElement.getAttribute("ref");
+                            //通过ref找到对应propertyValue实例
+                            Object propertyValue = BeanMap.get(refPropertyName);
+                            //通过id找到对应bean对象
+                            Object beanValue = BeanMap.get(id);
+                            //给bean中的fruitDAO fruitService 赋值
+                            Class beanClazz = beanValue.getClass();
+                            //通过property属性名获取bean中同名对象
+                            Field declaredField = beanClazz.getDeclaredField(propertyName);
+                            //给属性赋值
+                            declaredField.setAccessible(true);
+//                            Object properValue = propertyValue.getClass().newInstance();
+                            //给属性赋值  松耦合
+                            declaredField.set(beanValue, propertyValue);
                         }
                     }
                 }
@@ -90,7 +107,7 @@ public class XmlClassPathApplicationContext implements BeanFactory {
             e.printStackTrace();
         } catch (InstantiationException e) {
             e.printStackTrace();
-        } catch (IllegalAccessException e) {
+        } catch (IllegalAccessException | NoSuchFieldException e) {
             e.printStackTrace();
         }
     }

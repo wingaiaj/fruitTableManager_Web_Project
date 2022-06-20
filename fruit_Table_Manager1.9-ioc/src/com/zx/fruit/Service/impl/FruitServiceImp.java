@@ -1,7 +1,7 @@
 package com.zx.fruit.Service.impl;
 
-import com.zx.fruit.FruitDAO.FruitDAO;
 import com.zx.fruit.Service.FruitService;
+import com.zx.fruit.DAO.FruitDAO;
 import com.zx.fruit.pojo.Fruit;
 
 import java.util.List;
