@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<beans>
+    <!--    DAO对象-->
+    <bean id="fruitDAO" class="com.zx.fruit.DAO.DAOImp.FruitDAOImp"/>
+
+    <!--    服务对象-->
+    <bean id="fruitService" class="com.zx.fruit.service.Imp.FruitServiceImp">
+        <!--建立依赖 依赖为FruitDAO -->
+        <property name="fruitDAO" ref="fruitDAO"/>
+    </bean>
+
+    <!--控制器对象-->
+    <bean id="fruit" class="com.zx.fruit.controller.FruitController">
+        <!-- 建立依赖为fruitService  -->
+        <property name="fruitService" ref="fruitService"/>
+    </bean>
+</beans>
+
