@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<beans>
+    <bean id="fruitDAO" class="com.zx.fruit.DAO.FruitDAOImp"/>
+    <bean id="fruitService" class="com.zx.fruit.Service.impl.FruitServiceImp">
+        <!--property标签用来表示属性;name表示属性名;ref表示引用其他bean的id值-->
+        <property name="fruitDAO" ref="fruitDAO"/>
+    </bean>
+    <!--这个bean标签的作用是 将来servletPath中涉及的名称是fruit,那么通过id 就可找到此类 fruitController来处理-->
+    <bean id="fruit" class="com.zx.fruit.Controller.FruitController">
+        <property name="fruitService" ref="fruitService"/>
+    </bean>
+</beans>
