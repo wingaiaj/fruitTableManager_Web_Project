@@ -1,9 +1,11 @@
 package com.zx.fruit.Service.impl;
 
-import com.zx.fruit.Service.FruitService;
 import com.zx.fruit.DAO.FruitDAO;
+import com.zx.fruit.Service.FruitService;
 import com.zx.fruit.pojo.Fruit;
+import com.zx.myssmSpring.util.jdbcUtils;
 
+import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -20,37 +22,54 @@ public class FruitServiceImp implements FruitService {
 
     //获取所有分页后的数据
     @Override
-    public List<Fruit> getFruit(String keyword, Integer pageNo) {
-        return fruitDAO.getFruitLimit(pageNo, keyword);
+    public List<Fruit> getFruit(String keyword, Integer pageNo){
+        try {
+            //打印哈希值 查看是否是同一个连接
+            System.out.println("fruitController-getFruit-connection是否相同:" + jdbcUtils.getConnection());
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return fruitDAO.getFruitLimit (pageNo, keyword);
     }
 
     //添加一条记录
     @Override
-    public void addFruit(Fruit fruit) {
+    public void addFruit(Fruit fruit){
         fruitDAO.addFruit(fruit);
+        Fruit fruit2 = fruitDAO.getFruit(2);
+            fruit2.setCount(5000);
+        fruitDAO.alterFruit(fruit2);
     }
 
     //获取单个水果对象
     @Override
-    public Fruit getOneFruit(Integer fid) {
+    public Fruit getOneFruit(Integer fid){
         return fruitDAO.getFruit(fid);
     }
 
     //获取总记录条数
     @Override
-    public Integer getFruitCount(String keyword) {
+    public Integer getFruitCount(String keyword){
+
+            //打印哈希值 查看是否是同一个连接
+        try {
+            System.out.println("fruitController-fruitCount-connection是否相同:" + jdbcUtils.getConnection());
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
         int fruitCount = fruitDAO.getFruitCount(keyword);
         return (fruitCount + 8 - 1) / 8;
     }
 
     //更新数据
     @Override
-    public void update(Fruit fruit) {
+    public void update(Fruit fruit){
         fruitDAO.alterFruit(fruit);
     }
 
     @Override
-    public void del(Integer fid) {
+    public void del(Integer fid){
         fruitDAO.deleteFruit(fid);
     }
 }

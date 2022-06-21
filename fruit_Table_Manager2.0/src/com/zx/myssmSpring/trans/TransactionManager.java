@@ -14,37 +14,30 @@ import java.sql.SQLException;
  */
 public class TransactionManager {
 
-    ThreadLocal<Connection> threadLocal = new ThreadLocal<>();
-
     //开启事务
-    public void beginTrans() throws SQLException {
+    public static void beginTrans() throws SQLException {
+        //开启事务
         //本地线程获取连接
-        Connection connection = threadLocal.get();
-        //连接为空
-        if (connection == null) {
-            connection = jdbcUtils.getConnection();
-            threadLocal.set(connection);
-        }
-        //不为空
-        //取消自动提交
-        connection.setAutoCommit(false);
+        jdbcUtils.getConnection().setAutoCommit(false);//取消自动提交
     }
 
     //提交事务
-    public void commit() throws SQLException {
-
-        jdbcUtils.getConnection().commit();
+    public static void commit() throws SQLException {
+        //获取连接
+        Connection connection = jdbcUtils.getConnection();
+        //提交操作
+        connection.commit();
+        //关闭连接
+        jdbcUtils.closeConn();
     }
 
     //回滚事务
-    public void rollback() throws SQLException {
-        //本地线程获取连接
-        Connection connection = threadLocal.get();
-        //连接为空
-        if (connection == null) {
-            connection = jdbcUtils.getConnection();
-        }
-        //回滚
+    public static void rollback() throws SQLException {
+        //获取连接
+        Connection connection = jdbcUtils.getConnection();
+        //回滚操作
         connection.rollback();
+        //关闭连接
+        jdbcUtils.closeConn();
     }
 }

@@ -1,15 +1,13 @@
 package com.zx.myssmSpring.myspringmvc;
 
-import com.zx.myssmSpring.util.StringUtils;
 import com.zx.myssmSpring.io.BeanFactory;
 import com.zx.myssmSpring.io.XmlClassPathApplicationContext;
+import com.zx.myssmSpring.util.StringUtils;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Parameter;
 
@@ -24,16 +22,18 @@ import java.lang.reflect.Parameter;
 public class DispatcherServlet extends ViewBaseServlet {
     //接口实现类
     BeanFactory beanFactory; //声明getBean方法 根据 BeanId返回容器中的对象
+
     //实例化方法执行
     @Override
     public void init() throws ServletException {
         super.init();
         //实现接口   在实现类构造器中读取配置文件 获取对象  装入容器
         beanFactory = new XmlClassPathApplicationContext();
+
     }
 
     @Override
-    protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void service(HttpServletRequest request, HttpServletResponse response) {
         //获取servletPath
         String servletPath = request.getServletPath();
         //截取字符 例:/fruit.do -> fruit.do -> fruit
@@ -94,10 +94,9 @@ public class DispatcherServlet extends ViewBaseServlet {
                     } else {
                         super.processTemplate(returnValue, request, response);
                     }
-                } catch (IllegalAccessException e) {
+                } catch (Exception e) {
                     e.printStackTrace();
-                } catch (InvocationTargetException e) {
-                    e.printStackTrace();
+                    throw new DispatcherException("DispatcherServlet出现错误");
                 }
             }
         }

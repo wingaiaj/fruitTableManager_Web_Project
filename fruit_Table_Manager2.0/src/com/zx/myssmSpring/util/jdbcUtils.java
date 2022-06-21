@@ -37,14 +37,30 @@ public class jdbcUtils {
     public static Connection getConnection() throws SQLException {
         //本地线程获取连接
         Connection connection = threadLocal.get();
-        //连接为空
+        //第一次连接赋值     连接为空
         if (connection == null) {
-            connection = dataSource.getConnection();;
+            connection = dataSource.getConnection();
             threadLocal.set(connection);
         }
-
+        //不为空返回当前连接
         return threadLocal.get();
     }
+
+    //关闭连接
+    public static void closeConn() throws SQLException {
+        //获取本地线程连接
+        Connection connection = threadLocal.get();
+        //如果为空结束方法
+        if (connection == null) {
+            return;
+        }
+        //如果不为空 关闭连接 本地线程为null
+        if (!connection.isClosed()) {
+            connection.close();
+            threadLocal.set(null);
+        }
+    }
+
 
     //关闭资源
     public static void close(Connection connection, Statement statement, ResultSet resultSet) {

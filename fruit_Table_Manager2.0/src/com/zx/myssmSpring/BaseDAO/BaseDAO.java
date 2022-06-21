@@ -33,17 +33,16 @@ public abstract class BaseDAO<T> {
 
     //获取单条记录
     public T getRecord(Connection connection, String sql, Object... args) {
-        PreparedStatement preparedStatement = null;
-        ResultSet resultSet = null;
+
         try {
             //预编译sql语句
-            preparedStatement = connection.prepareStatement(sql);
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
             //填充占位符
             for (int i = 0; i < args.length; i++) {
                 preparedStatement.setObject(i + 1, args[i]);
             }
             //执行sql 获取结果集
-            resultSet = preparedStatement.executeQuery();
+            ResultSet resultSet = preparedStatement.executeQuery();
             //获取结果集元数据
             ResultSetMetaData metaData = resultSet.getMetaData();
             if (resultSet.next()) {
@@ -61,23 +60,33 @@ public abstract class BaseDAO<T> {
                     //反射给对象属性赋值
                     declaredField.set(t, value);
                 }
+                //关闭资源
+                jdbcUtils.close(null, preparedStatement, resultSet);
                 //返回对象
                 return t;
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            //关闭资源
-            jdbcUtils.close(null, preparedStatement, resultSet);
+            throw new DAOException("BaseDAO getRecord出错了");
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (NoSuchFieldException e) {
+            e.printStackTrace();
+        } catch (SecurityException e) {
+            e.printStackTrace();
+        } catch (IllegalArgumentException e) {
+            e.printStackTrace();
         }
         return null;
     }
 
     //获取多条记录
-    public List<T> getListRecord(Connection connection, String sql, Object... args) {
+    public List<T> getListRecord(Connection connection, String sql, Object... args){
+
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
-        ArrayList<T> list = null;
         try {
             //预编译sql语句
             preparedStatement = connection.prepareStatement(sql);
@@ -90,7 +99,7 @@ public abstract class BaseDAO<T> {
             //获取结果集元数据
             ResultSetMetaData metaData = resultSet.getMetaData();
             //创建集合存放多个对象
-            list = new ArrayList();
+            ArrayList<T> list = new ArrayList();
             //循环判断多条数据
             while (resultSet.next()) {
                 //创建实现类对象
@@ -110,21 +119,34 @@ public abstract class BaseDAO<T> {
                 }
                 list.add(t);
             }
-        } catch (Exception e) {
+            return list;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new DAOException("BaseDAO getListRecord出错了");
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (NoSuchFieldException e) {
+            e.printStackTrace();
+        } catch (SecurityException e) {
+            e.printStackTrace();
+        } catch (IllegalArgumentException e) {
             e.printStackTrace();
         } finally {
             //关闭资源
             jdbcUtils.close(null, preparedStatement, resultSet);
         }
-        return list;
+        return null;
     }
+
 
     //更新操作
     public boolean update(Connection connection, String sql, Object... args) {
-        PreparedStatement preparedStatement = null;
+
         try {
             //预编译sql语句
-            preparedStatement = connection.prepareStatement(sql);
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
             //填充占位符
             for (int i = 0; i < args.length; i++) {
                 preparedStatement.setObject(i + 1, args[i]);
@@ -132,20 +154,21 @@ public abstract class BaseDAO<T> {
             //执行sql
             int i = preparedStatement.executeUpdate();
             //改变行数不为0 有数据 返回true 没有返回false
+            //关闭资源
+            jdbcUtils.close(null, preparedStatement, null);
             if (i > 0) {
                 return true;
             }
+            return false;
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            //关闭资源
-            jdbcUtils.close(null, preparedStatement, null);
+            throw new DAOException("BaseDAO update出错了");
         }
-        return false;
     }
 
     //总条数
-    public Object[] getCount(Connection connection, String sql, Object... args) {
+    public Object[] getCount(Connection connection, String sql, Object... args){
+
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
         try {
@@ -176,6 +199,7 @@ public abstract class BaseDAO<T> {
             }
         } catch (SQLException e) {
             e.printStackTrace();
+            throw new DAOException("BaseDAO getCount出错了");
         } finally {
             //关闭资源
             jdbcUtils.close(null, preparedStatement, resultSet);

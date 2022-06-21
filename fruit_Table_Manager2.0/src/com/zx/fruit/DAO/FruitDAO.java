@@ -16,9 +16,6 @@ public interface FruitDAO {
     //添加水果记录操作
     boolean addFruit(Fruit fruit);
 
-    //查询所有水果数据
-    List<Fruit> getAllFruit();
-
     //根据总条数水果记录
     int getFruitCount(String nmu);
 
@@ -32,6 +29,6 @@ public interface FruitDAO {
     boolean deleteFruit(Integer fid);
 
     //对数据进行分页
-    List<Fruit> getFruitLimit(Integer num,String name);
+    List<Fruit> getFruitLimit(Integer num, String name);
 
 }

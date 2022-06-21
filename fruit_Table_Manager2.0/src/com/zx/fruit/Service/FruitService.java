@@ -13,16 +13,16 @@ import java.util.List;
  */
 public interface FruitService {
     //获取所有水果记录
-    List<Fruit> getFruit(String keyword, Integer pageNo);
+    List<Fruit> getFruit(String keyword, Integer pageNo) ;
 
     //添加一条记录
-    void addFruit(Fruit fruit);
+    void addFruit(Fruit fruit) ;
 
     //获取单条水果记录根据fid
     Fruit getOneFruit(Integer fid);
 
     //获取总水果记录
-    Integer getFruitCount(String keyword);
+    Integer getFruitCount(String keyword) ;
 
     //更新数据
     void update(Fruit fruit);

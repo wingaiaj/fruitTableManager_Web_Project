@@ -20,7 +20,7 @@ public class FruitController extends ViewBaseServlet {
     //创建业务层实现类
     FruitService fruitService = null; //解耦合
 
-    private String index(Integer pageNo, String keyword, String op, HttpSession session, HttpServletRequest request) {
+    private String index(Integer pageNo, String keyword, String op, HttpSession session, HttpServletRequest request){
         if (pageNo == null) {
             pageNo = 1;
         }
@@ -81,7 +81,7 @@ public class FruitController extends ViewBaseServlet {
         return "redirect:fruit.do";
     }
 
-    private String del(Integer fid) {
+    private String del(Integer fid){
         //获取参数
         //判断获取参数是否为空
         //调用fruitDao方法
@@ -91,7 +91,7 @@ public class FruitController extends ViewBaseServlet {
 
     }
 
-    private String Edit(Integer fid, HttpServletRequest request) {
+    private String Edit(Integer fid, HttpServletRequest request)  {
         //获取请求参数
         //转换为int类型
         //调用根据节id获取水果方法
@@ -103,7 +103,7 @@ public class FruitController extends ViewBaseServlet {
         return "edit";
     }
 
-    private String update(Integer fid, String fname, Integer price, Integer fcount, String remark) {
+    private String update(Integer fid, String fname, Integer price, Integer fcount, String remark){
         //获取请求参数
         //创建水果对象
         Fruit fruit = new Fruit(fid, fname, price, fcount, remark);
