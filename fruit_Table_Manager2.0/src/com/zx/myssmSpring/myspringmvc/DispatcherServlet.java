@@ -1,9 +1,9 @@
 package com.zx.myssmSpring.myspringmvc;
 
-import com.zx.myssmSpring.io.BeanFactory;
-import com.zx.myssmSpring.io.XmlClassPathApplicationContext;
+import com.zx.myssmSpring.ioc.BeanFactory;
 import com.zx.myssmSpring.util.StringUtils;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -27,9 +27,19 @@ public class DispatcherServlet extends ViewBaseServlet {
     @Override
     public void init() throws ServletException {
         super.init();
+        //之前是在此处主动创建ioc容器的
+        //现在优化为从application作用域获取
         //实现接口   在实现类构造器中读取配置文件 获取对象  装入容器
-        beanFactory = new XmlClassPathApplicationContext();
-
+//         beanFactory= new XmlClassPathApplicationContext();
+        //获取application
+        ServletContext servletContext = getServletContext();
+        //获取在监听器中保存在作用域的beanFactory
+        Object beanFactory = servletContext.getAttribute("beanFactory");
+        if (beanFactory != null) {
+            this.beanFactory = (BeanFactory) beanFactory;
+        } else {
+            throw new RuntimeException("IOC容器获取失败");
+        }
     }
 
     @Override

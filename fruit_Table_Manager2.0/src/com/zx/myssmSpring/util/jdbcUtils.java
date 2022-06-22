@@ -57,8 +57,10 @@ public class jdbcUtils {
         //如果不为空 关闭连接 本地线程为null
         if (!connection.isClosed()) {
             connection.close();
-            threadLocal.set(null);
+//            threadLocal.set(null);
+            threadLocal.remove();
         }
+
     }
 
 

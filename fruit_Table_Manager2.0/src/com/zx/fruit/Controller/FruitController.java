@@ -2,7 +2,6 @@ package com.zx.fruit.Controller;
 
 import com.zx.fruit.Service.FruitService;
 import com.zx.fruit.pojo.Fruit;
-import com.zx.myssmSpring.myspringmvc.ViewBaseServlet;
 import com.zx.myssmSpring.util.StringUtils;
 
 import javax.servlet.http.HttpServletRequest;
@@ -16,7 +15,7 @@ import java.util.List;
  * @Date 2022/6/16 20:25
  * @Version 1.0
  */
-public class FruitController extends ViewBaseServlet {
+public class FruitController  {
     //创建业务层实现类
     FruitService fruitService = null; //解耦合
 

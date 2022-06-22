@@ -31,18 +31,18 @@ public class OpenSessionInViewFilter implements Filter {
 
         try {
             //开启事务
-            System.out.println("开启事务...");
+//            System.out.println("开启事务...");
             TransactionManager.beginTrans();
             //放行操作
             filterChain.doFilter(servletRequest, servletResponse);
             //提交事务
             TransactionManager.commit();
-            System.out.println("提交事务...");
+//            System.out.println("提交事务...");
         } catch (Exception e) {
             try {
             //回滚事务
                 TransactionManager.rollback();
-                System.out.println("回滚事务...");
+//                System.out.println("回滚事务...");
             } catch (SQLException ex) {
                 ex.printStackTrace();
             }
